@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
     <meta charset="UTF-8">
     <title th:text="#{registration.page.title}">Page Title</title>
+    <script>
+        $(function() {
+            $("#accountBirthDate" ).datepicker();
+        });
+    </script>
 
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 </head>
 <body>
 <div class="container">
@@ -97,9 +102,11 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="accountBirthDate">Birth Date</label>
-                            <input type="date" class="form-control" id="accountBirthDate" th:field="*{accountBirthDate}"
+                 <!--           <input type="date" class="form-control" id="accountBirthDate" th:field="*{accountBirthDate}"
                                    placeholder="Birth Date"
-                            >
+                            >-->
+                            <input type="text" id="accountBirthDate" class="form-control" th:field="*{accountBirthDate}"
+                                   th:value="${#dates.format(registration.accountBirthDate,'MM/dd/yyyy')}"/>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="gender">Gender</label>
