@@ -1,7 +1,7 @@
 package com.bkash.festivalreg.repository;
 
-import com.bkash.festivalreg.domain.security.Role;
-import com.bkash.festivalreg.domain.security.User;
+import com.bkash.festivalreg.domain.security.FolkFestAppRole;
+import com.bkash.festivalreg.domain.security.FolkFestAppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author ekansh
  * @since 2/4/16
  */
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface RoleRepository extends JpaRepository<FolkFestAppRole,Long> {
 
-    User findByRole(String role);
-    Role findById(long id);
+    FolkFestAppUser findByRole(String role);
+    FolkFestAppRole findById(long id);
 }

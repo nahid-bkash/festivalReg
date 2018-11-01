@@ -9,17 +9,19 @@ import java.util.Set;
  * @since 2/4/16
  */
 @Entity
-public class Role {
+public class FolkFestAppRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "FOLK_FEST_APP_ROLE_SEQ")
+    @SequenceGenerator(name = "FOLK_FEST_APP_ROLE_SEQ", initialValue = 1, allocationSize = 1)
     private long id;
 
     @Column(unique=true)
     private String role;
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
-    private Set<User> users;
+    private Set<FolkFestAppUser> users;
 
     public long getId() {
         return id;
@@ -37,11 +39,11 @@ public class Role {
         this.role = role;
     }
 
-    public Set<User> getUsers() {
+    public Set<FolkFestAppUser> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<FolkFestAppUser> users) {
         this.users = users;
     }
 }

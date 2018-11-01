@@ -1,12 +1,13 @@
 package com.bkash.festivalreg.bootstrap;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.bkash.festivalreg.domain.Registration;
-import com.bkash.festivalreg.domain.security.Role;
-import com.bkash.festivalreg.domain.security.User;
+import com.bkash.festivalreg.domain.security.FolkFestAppRole;
+import com.bkash.festivalreg.domain.security.FolkFestAppUser;
 import com.bkash.festivalreg.repository.RegistrationRepository;
 import com.bkash.festivalreg.repository.RoleRepository;
 import com.bkash.festivalreg.repository.UserRepository;
@@ -52,19 +53,19 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-		//if (Arrays.stream(environment.getActiveProfiles()).anyMatch(env -> (env.equalsIgnoreCase("dev")))) {
+		if (Arrays.stream(environment.getActiveProfiles()).anyMatch(env -> (env.equalsIgnoreCase("dev")))) {
 
 			addSecurityIntitalData();
 
 			addRestrationData();
 
-		//}
+		}
 	}
 
 	private void addRestrationData() {
 
 		Registration testData1 = new Registration();
-		testData1.setId(1L);
+	//	testData1.setId(1L);
 		testData1.setAccountBirthDate(new Date());
 		testData1.setAccountFatherName("Late. Sakhawat Hossain");
 		testData1.setAccountMotherName("Late. Jahanara Hossain ");
@@ -83,7 +84,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		this.registrationRepository.save(testData1);
 
 		Registration testData2 = new Registration();
-		testData2.setId(2L);
+		//testData2.setId(2L);
 		testData2.setAccountBirthDate(new Date());
 		testData2.setAccountFatherName("Kawser's father name");
 		testData2.setAccountMotherName("Kawser's mother name");
@@ -106,19 +107,19 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 	private void addSecurityIntitalData() {
 
-		Role roleAdmin = new Role();
+		FolkFestAppRole roleAdmin = new FolkFestAppRole();
 		roleAdmin.setRole("ADMIN");
 
-		Role rolePharma = new Role();
+		FolkFestAppRole rolePharma = new FolkFestAppRole();
 		rolePharma.setRole("USER");
 
 
 		// adding admin user
-		Set<Role> setAdminRole = new HashSet<Role>();
+		Set<FolkFestAppRole> setAdminRole = new HashSet<FolkFestAppRole>();
 		setAdminRole.add(roleAdmin);
 		// setAdminRole.add(roleManager);
 
-		User admin = new User();
+		FolkFestAppUser admin = new FolkFestAppUser();
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode("admin");

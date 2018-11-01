@@ -7,8 +7,8 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
-import com.bkash.festivalreg.domain.security.Role;
-import com.bkash.festivalreg.domain.security.User;
+import com.bkash.festivalreg.domain.security.FolkFestAppUser;
+import com.bkash.festivalreg.domain.security.FolkFestAppRole;
 import com.bkash.festivalreg.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class SSUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            User user = userRepository.findByUsername(username);
+            FolkFestAppUser user = userRepository.findByUsername(username);
             if (user == null) {
                 LOGGER.info("FolkFestApp::SSUserDetailsService::loadUserByUsername::user not found with the provided username :"+username);
                 return null;
@@ -48,13 +48,13 @@ public class SSUserDetailsService implements UserDetailsService {
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
         }
         catch (Exception e){
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("FolkFestAppUser not found");
         }
     }
 
-    private Set<GrantedAuthority> getAuthorities(User user){
+    private Set<GrantedAuthority> getAuthorities(FolkFestAppUser user){
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        for(Role role : user.getRoles()) {
+        for(FolkFestAppRole role : user.getRoles()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
             authorities.add(grantedAuthority);
         }

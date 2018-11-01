@@ -2,26 +2,19 @@ package com.bkash.festivalreg.domain.security;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 /**
  * @author ekansh
  * @since 2/4/16
  */
 @Entity
-public class User {
+public class FolkFestAppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+  //  @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "FOLK_FEST_APP_USER_SEQ")
+    @SequenceGenerator(name = "FOLK_FEST_APP_USER_SEQ", initialValue = 1, allocationSize = 1)
     private long id;
 
     @Column(unique=true)
@@ -38,7 +31,7 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<FolkFestAppRole> roles;
     
     
 
@@ -82,11 +75,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Set<FolkFestAppRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<FolkFestAppRole> roles) {
         this.roles = roles;
     }
 }

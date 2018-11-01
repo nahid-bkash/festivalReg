@@ -1,6 +1,6 @@
 package com.bkash.festivalreg.repository;
 
-import com.bkash.festivalreg.domain.security.User;
+import com.bkash.festivalreg.domain.security.FolkFestAppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author ekansh
  * @since 2/4/16
  */
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<FolkFestAppUser,Long> {
 
-    User findByUsername(String username);
-    User findById(long id);
+    FolkFestAppUser findByUsername(String username);
+    FolkFestAppUser findById(long id);
     
 }

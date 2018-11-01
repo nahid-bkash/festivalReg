@@ -9,7 +9,9 @@ import java.util.Date;
 @Entity
 public class Registration {
     @Id
-    @GeneratedValue
+  //  @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "FOLK_FEST_APP_REGISTRATION_SEQ")
+    @SequenceGenerator(name = "FOLK_FEST_APP_REGISTRATION_SEQ", initialValue = 1, allocationSize = 1)
     private Long id;
     private String accountNumber;
     private String accountFirstName;
