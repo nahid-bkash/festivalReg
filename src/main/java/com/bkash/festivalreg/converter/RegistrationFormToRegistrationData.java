@@ -29,6 +29,7 @@ public class RegistrationFormToRegistrationData {
         entity.setIdType(form.getIdType());
         entity.setAccountHasbandWifeName(form.getAccountHasbandWifeName());
         entity.setDataSaved(form.getDataSaved());
+        entity.setFormSerial(form.getFormSerial());
         return entity;
 
     }

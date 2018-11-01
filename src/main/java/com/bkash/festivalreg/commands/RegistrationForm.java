@@ -27,7 +27,7 @@ public class RegistrationForm {
     private String idNumber;
     private String accountHasbandWifeName;
     private Boolean dataSaved;
-
+    private Long formSerial;
 
     @Column(name = "estimatedMonthlyIncome",precision=10, scale=2)
     private Double estimatedMonthlyIncome;
@@ -35,6 +35,14 @@ public class RegistrationForm {
     private String sourceOfFund;
 
     private String detailsOfOccupation;
+
+    public Long getFormSerial() {
+        return formSerial;
+    }
+
+    public void setFormSerial(Long formSerial) {
+        this.formSerial = formSerial;
+    }
 
     public Boolean getDataSaved() {
         return dataSaved;

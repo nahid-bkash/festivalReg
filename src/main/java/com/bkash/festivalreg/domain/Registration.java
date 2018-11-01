@@ -1,6 +1,8 @@
 package com.bkash.festivalreg.domain;
 
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -30,13 +32,23 @@ public class Registration {
     private String idType;
     private String idNumber;
     private Boolean dataSaved;
-    //TODO: add form serial number
 
+    private Long formSerial;
 
     @Column(name = "estimatedMonthlyIncome",precision=10, scale=2)
     private Double estimatedMonthlyIncome;
+
     private String sourceOfFund;
+
     private String detailsOfOccupation;
+
+    public Long getFormSerial() {
+        return formSerial;
+    }
+
+    public void setFormSerial(Long formSerial) {
+        this.formSerial = formSerial;
+    }
 
     public Boolean getDataSaved() {
         return dataSaved;
