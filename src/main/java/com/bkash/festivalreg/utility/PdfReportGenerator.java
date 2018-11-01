@@ -104,7 +104,7 @@ public class PdfReportGenerator {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         header.addCell(cell);
 
-        Font f3 = FontFactory.getFont("Times Roman", 9, Font.BOLD);
+ /*       Font f3 = FontFactory.getFont("Times Roman", 9, Font.BOLD);
         paragraph = new Paragraph("Personal Information(Owner/operator)", f3);
         paragraph.setIndentationLeft(250);
 
@@ -113,17 +113,25 @@ public class PdfReportGenerator {
         cell.setBorder(PdfPCell.NO_BORDER);
         cell.setRowspan(1);
         cell.setPaddingLeft(180);
-        header.addCell(cell);
+        header.addCell(cell);*/
 
 
         document.add(header);
 
-
-        Font subtitleFont = FontFactory.getFont("Times Roman", 7, BaseColor.BLACK);
-
         PdfPTable table = new PdfPTable(8);
         table.setWidths(new int[]{1, 1, 1, 1, 1, 1, 1, 1});
         table.setSpacingBefore(3);
+
+        //form serial
+        Font fontFormSerial = FontFactory.getFont("Times Roman", 11, BaseColor.BLACK);
+        addContent(table, fontFormSerial, 8, "Form Serial # "+data.getFormSerial(), true, 0);
+        addContent(table, fontFormSerial, 8, "    ", true, 0);
+       // addContent(table, font, 6, ""+data.getFormSerial(), true, 0);
+
+        //end of form serial
+
+
+        Font subtitleFont = FontFactory.getFont("Times Roman", 7, BaseColor.BLACK);
 
         Font fontParam = FontFactory.getFont("Times Roman", 10, Font.BOLD);
         PdfPCell cell1;
@@ -140,6 +148,12 @@ public class PdfReportGenerator {
         Font font = FontFactory.getFont("Times Roman", 7, BaseColor.BLACK);
 
         addContent(table, font, 8, "    ", true, 0);
+
+/*
+        addContent(table, font, 2, "Form Serial Number:", true, 0);
+        addContent(table, font, 6, ""+data.getFormSerial(), true, 0);
+
+        addContent(table, font, 8, "    ", true, 0);*/
 
         addContent(table, font, 2, "1.  Applicant’s Name:", true, 0);
         addContent(table, font, 6, data.getAccountFirstName()+" "+data.getAccountLastName(), true, 0);
