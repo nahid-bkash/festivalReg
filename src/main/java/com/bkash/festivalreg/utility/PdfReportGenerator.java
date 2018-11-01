@@ -21,6 +21,11 @@ public class PdfReportGenerator {
     @Value("${pdf-assets}")
     private String PDF_ASSETS;
 
+    @Value("${applicant-image-path}")
+    private String APPLICANT_PHOTO_ASSETS;
+
+
+
     public void createCustomerRegistrationPDF(String filename, String path, Registration data) throws DocumentException, IOException {
 
 
@@ -62,9 +67,11 @@ public class PdfReportGenerator {
         header.addCell(cell);
 
         //Right Column
-/*
+
         try {
-            img = Image.getInstance(kycData.getApplicantImagePath());
+
+            String photopath=APPLICANT_PHOTO_ASSETS+data.getAccountNumber()+".jpg";
+            img = Image.getInstance(photopath);
             img.scaleToFit(90, 90);
             chunk = new Chunk(img, 0, 0, true);
             phraseImg = new Phrase();
@@ -90,7 +97,7 @@ public class PdfReportGenerator {
 
         header.addCell(cell);
 
-        */
+
 
         Font f2 = FontFactory.getFont("Times Roman", 10, Font.BOLD);
         paragraph = new Paragraph("bKash Customer Account Opening Application", f2);
