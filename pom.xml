@@ -6,7 +6,7 @@
 	<groupId>com.bkash.festivalreg</groupId>
 	<artifactId>festivalReg</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>festivalReg</name>
 	<description>Demo project for Spring Boot</description>
@@ -114,6 +114,14 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0</version>
 		</dependency>
+
+	<!--	this dependency required for tomcat deployment-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<!--	this dependency required for tomcat deployment-->
 	</dependencies>
 
 	<build>

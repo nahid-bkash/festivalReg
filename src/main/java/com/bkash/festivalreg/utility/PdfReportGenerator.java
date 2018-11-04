@@ -6,6 +6,8 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
@@ -18,11 +20,14 @@ import java.util.Map;
 @Component
 public class PdfReportGenerator {
 
-    @Value("${pdf-assets}")
-    private String PDF_ASSETS;
+  //  @Value("${pdf-assets}")
+   // private String PDF_ASSETS;
 
     @Value("${applicant-image-path}")
     private String APPLICANT_PHOTO_ASSETS;
+
+
+
 
 
 
@@ -48,8 +53,12 @@ public class PdfReportGenerator {
         header.setWidths(new int[]{2, 2, 1});
         header.setSpacingBefore(1);
 
-        Image img = Image.getInstance(PDF_ASSETS + "bkash.png");
-        img.scaleToFit(100, 100);
+        Resource resource = new ClassPathResource("/static/images/bkash.png");
+
+        //Image img = Image.getInstance(PDF_ASSETS + "bkash.png");
+        Image img =Image.getInstance(resource.getURL());
+
+       // img.scaleToFit(100, 100);
         Chunk chunk = new Chunk(img, 0, 0, true);
 
 
@@ -97,10 +106,8 @@ public class PdfReportGenerator {
 
         header.addCell(cell);
 
-
-
-        Font f2 = FontFactory.getFont("Times Roman", 10, Font.BOLD);
-        paragraph = new Paragraph("bKash Customer Account Opening Application", f2);
+        Font fontSize10Bold = FontFactory.getFont("Times Roman", 10, Font.BOLD);
+        paragraph = new Paragraph("bKash Customer Account Opening Application", fontSize10Bold);
         paragraph.setAlignment(Element.ALIGN_JUSTIFIED_ALL);
 
         cell = new PdfPCell(paragraph);
@@ -111,8 +118,8 @@ public class PdfReportGenerator {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         header.addCell(cell);
 
- /*       Font f3 = FontFactory.getFont("Times Roman", 9, Font.BOLD);
-        paragraph = new Paragraph("Personal Information(Owner/operator)", f3);
+        Font fontSize8Bold = FontFactory.getFont("Times Roman", 8, Font.BOLD);
+        paragraph = new Paragraph("(New Registration / Information Update)", fontSize8Bold);
         paragraph.setIndentationLeft(250);
 
         cell = new PdfPCell(paragraph);
@@ -120,7 +127,7 @@ public class PdfReportGenerator {
         cell.setBorder(PdfPCell.NO_BORDER);
         cell.setRowspan(1);
         cell.setPaddingLeft(180);
-        header.addCell(cell);*/
+        header.addCell(cell);
 
 
         document.add(header);
@@ -130,9 +137,12 @@ public class PdfReportGenerator {
         table.setSpacingBefore(3);
 
         //form serial
-        Font fontFormSerial = FontFactory.getFont("Times Roman", 11, BaseColor.BLACK);
-        addContent(table, fontFormSerial, 8, "Form Serial # "+data.getFormSerial(), true, 0);
-        addContent(table, fontFormSerial, 8, "    ", true, 0);
+        Font fontSize8Black = FontFactory.getFont("Times Roman", 8, BaseColor.BLACK);
+        addContent(table, fontSize8Black, 8, "Form Serial # "+data.getFormSerial(), true, 0);
+        String reportDate = new SimpleDateFormat("dd-MMM-yyyy").format(new Date());
+        addContent(table, fontSize8Black, 8, "Date "+reportDate, true, 0);
+        addContent(table, fontSize8Black, 8, "Account Number # "+data.getAccountNumber(), true, 0);
+        addContent(table, fontSize8Black, 8, "    ", true, 0);
        // addContent(table, font, 6, ""+data.getFormSerial(), true, 0);
 
         //end of form serial
@@ -156,15 +166,14 @@ public class PdfReportGenerator {
 
         addContent(table, font, 8, "    ", true, 0);
 
-/*
-        addContent(table, font, 2, "Form Serial Number:", true, 0);
-        addContent(table, font, 6, ""+data.getFormSerial(), true, 0);
+        addContent(table, font, 8, "1.  Applicant’s Name", true, 0);
+        //addContent(table, font, 6, data.getAccountFirstName()+" "+data.getAccountLastName(), true, 0);
 
-        addContent(table, font, 8, "    ", true, 0);*/
+        addContent(table, font, 2, "First Name", true, 10);
+        addContent(table, font, 6, data.getAccountFirstName(), true, 0);
 
-        addContent(table, font, 2, "1.  Applicant’s Name:", true, 0);
-        addContent(table, font, 6, data.getAccountFirstName()+" "+data.getAccountLastName(), true, 0);
-
+        addContent(table, font, 2, "Last Name:", true, 10);
+        addContent(table, font, 6, data.getAccountLastName(), true, 0);
 
         addContent(table, font, 2, "2.  Date of Birth Date: ", true, 0);
         String formattedDate = "";
@@ -247,7 +256,6 @@ public class PdfReportGenerator {
         PdfPTable tablebottom = new PdfPTable(3);
         tablebottom.setWidths(new int[]{3, 2, 1});
         tablebottom.setSpacingBefore(3);
-
         addContent(tablebottom, font, 3, "    ", true, 0);
         //addContent(tablebottom, font, 3, "    ", true, 0);
 
@@ -255,12 +263,13 @@ public class PdfReportGenerator {
         addContent(tablebottom, font, 1, "..................................", true, 0);
         addContent(tablebottom, font, 1, "..................", true, 0);
 
-        addContent(tablebottom, font, 1, "Applicant's Name", true, 0);
+        addContent(tablebottom, font, 1, "Customer’s Signature/Thumbprint", true, 0);
         addContent(tablebottom, font, 1, "Signature", true, 0);
         addContent(tablebottom, font, 1, "Date", true, 0);
 
         addContent(tablebottom, font, 3, "    ", true, 0);
-
+           addContent(tablebottom, font, 3, " Attachments: 1.Photo ID:(Yes/No)   2.One Copy of Applicant’s Photo:(Yes/No)   3. Others:(Yes/No)", true, 0);
+        addContent(tablebottom, font, 3, "    ", true, 0);
         document.add(tablebottom);
 
 
@@ -276,23 +285,22 @@ public class PdfReportGenerator {
         paragraph.setSpacingAfter(5);
         document.add(paragraph);
 
-
         PdfPTable tablebottom3 = new PdfPTable(3);
 
         tablebottom3.setWidths(new int[]{3, 2, 1});
         tablebottom3.setSpacingBefore(3);
 
-        addContent(tablebottom3, font, 3, "    ", true, 0);
-        addContent(tablebottom3, font, 3, "Agent bKash Number:", true, 0);
-
-        addContent(tablebottom3, font, 3, "    ", true, 0);
         addContent(tablebottom3, font, 3, "Agent's Name:", true, 0);
 
         addContent(tablebottom3, font, 3, "    ", true, 0);
         addContent(tablebottom3, font, 3, "Signature & Seal: ", true, 0);
+
+        addContent(tablebottom3, font, 3, "    ", true, 0);
+        addContent(tablebottom3, font, 3, "Agent bKash Number:", true, 0);
+
         addContent(tablebottom3, font, 3, "    ", true, 0);
         addContent(tablebottom3, font, 3, "Date: ", true, 0);
-
+        addContent(tablebottom3, font, 3, "    ", true, 0);
 
         document.add(tablebottom3);
 
@@ -308,7 +316,7 @@ public class PdfReportGenerator {
 
         PdfPTable tablebottom4 = new PdfPTable(3);
         tablebottom4.setWidths(new int[]{3, 2, 1});
-        tablebottom4.setSpacingBefore(15);
+        tablebottom4.setSpacingBefore(8);
 
 
         addContent(tablebottom4, font, 3, "    ", true, 0);
@@ -320,6 +328,11 @@ public class PdfReportGenerator {
         addContent(tablebottom4, font, 3, "    ", true, 0);
         addContent(tablebottom4, font, 3, "Date: ", true, 0);
 
+        addContent(tablebottom4, font, 3, "    ", true, 0);
+        addContent(tablebottom4, font, 3, "N.B bKash Account means the mobile account held with bKash", true, 0);
+
+      //  addContent(tablebottom4, font, 3, "    ", true, 0);
+        addContent(tablebottom4, font, 3, "Page 1 of 2", true, 0);
         document.add(tablebottom4);
 
         document.close();

@@ -31,11 +31,13 @@ public class FileUtility {
     @Value("${applicant-image-path}")
     private String APPLICANT_IMAGE_PATH;
 
-    @Value("${applicant-account-doccuments}")
-    private String APPLICANT_ACCOUNT_DOC_PATH;
+   // @Value("${applicant-account-doccuments}")
+   // private String APPLICANT_ACCOUNT_DOC_PATH;
 
+/*
     @Value("${applicant-kyc-pdf}")
     private String APPLICANT_KYC_PDF;
+*/
 
     public String dropzoneUpload(String basePath,String id, MultipartHttpServletRequest request){
         String savedPath = null;
@@ -81,7 +83,7 @@ public class FileUtility {
 
         return savedPath;
     }
-    public List<String> saveUploadedDocuments(String fileType, String merchantId,String uploadedBy, MultipartFile[] files) {
+  /*  public List<String> saveUploadedDocuments(String fileType, String merchantId,String uploadedBy, MultipartFile[] files) {
         LOGGER.info("FileUtility:: saveUploadedFiles:: ");
         List<String> pathList = new ArrayList<>();
         String directoryName = APPLICANT_ACCOUNT_DOC_PATH+"/"+uploadedBy+"/"+merchantId+"/"+fileType;
@@ -109,7 +111,7 @@ public class FileUtility {
         }
 
         return pathList;
-    }
+    }*/
 
     public String saveFile(byte[] bytes,String directoryName, String filename){
         String savedPath = null;

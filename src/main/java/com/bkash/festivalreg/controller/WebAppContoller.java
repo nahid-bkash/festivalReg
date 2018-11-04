@@ -42,6 +42,8 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+//@Value()
+//@RequestMapping("${server.servlet.context-path}")
 public class WebAppContoller {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebAppContoller.class);
@@ -57,10 +59,10 @@ public class WebAppContoller {
     private PdfReportGenerator generator;
     @Autowired
     private FileUtility fileUtility;
-    @Value("${applicant-image-path}")
+/*    @Value("${applicant-image-path}")
     private String APPLICANT_IMAGE_PATH;
     @Value("${applicant-nominee-image-path}")
-    private String APPLICANT_NOMINEE_IMAGE_PATH;
+    private String APPLICANT_NOMINEE_IMAGE_PATH;*/
     @Value("${applicant-kyc-pdf}")
     private String APPLICANT_KYC_PDF;
 
