@@ -255,16 +255,17 @@ public class PdfReportGenerator {
 
         PdfPTable tablebottom = new PdfPTable(3);
         tablebottom.setWidths(new int[]{3, 2, 1});
-        tablebottom.setSpacingBefore(3);
+        tablebottom.setSpacingBefore(15);
+
         addContent(tablebottom, font, 3, "    ", true, 0);
         //addContent(tablebottom, font, 3, "    ", true, 0);
 
         addContent(tablebottom, font, 1, "..........................................................", true, 0);
-        addContent(tablebottom, font, 1, "..................................", true, 0);
+        addContent(tablebottom, font, 1, "   ", true, 0);
         addContent(tablebottom, font, 1, "..................", true, 0);
 
         addContent(tablebottom, font, 1, "Customer’s Signature/Thumbprint", true, 0);
-        addContent(tablebottom, font, 1, "Signature", true, 0);
+        addContent(tablebottom, font, 1, "     ", true, 0);
         addContent(tablebottom, font, 1, "Date", true, 0);
 
         addContent(tablebottom, font, 3, "    ", true, 0);
@@ -288,18 +289,16 @@ public class PdfReportGenerator {
         PdfPTable tablebottom3 = new PdfPTable(3);
 
         tablebottom3.setWidths(new int[]{3, 2, 1});
-        tablebottom3.setSpacingBefore(3);
+        tablebottom3.setSpacingBefore(20);
 
-        addContent(tablebottom3, font, 3, "Agent's Name:", true, 0);
+        addContent(tablebottom3, font, 1, "..........................................................", true, 0);
+        addContent(tablebottom3, font, 1, ".......................................", true, 0);
+        addContent(tablebottom3, font, 1, "..................", true, 0);
 
-        addContent(tablebottom3, font, 3, "    ", true, 0);
-        addContent(tablebottom3, font, 3, "Signature & Seal: ", true, 0);
+        addContent(tablebottom3, font, 1, "Agent's Name", true, 0);
+        addContent(tablebottom3, font, 1, "Signature & Seal:", true, 0);
+        addContent(tablebottom3, font, 1, "Date", true, 0);
 
-        addContent(tablebottom3, font, 3, "    ", true, 0);
-        addContent(tablebottom3, font, 3, "Agent bKash Number:", true, 0);
-
-        addContent(tablebottom3, font, 3, "    ", true, 0);
-        addContent(tablebottom3, font, 3, "Date: ", true, 0);
         addContent(tablebottom3, font, 3, "    ", true, 0);
 
         document.add(tablebottom3);
@@ -316,22 +315,23 @@ public class PdfReportGenerator {
 
         PdfPTable tablebottom4 = new PdfPTable(3);
         tablebottom4.setWidths(new int[]{3, 2, 1});
-        tablebottom4.setSpacingBefore(8);
+        tablebottom4.setSpacingBefore(20);
 
+
+        addContent(tablebottom4, font, 1, "..........................................................", true, 0);
+        addContent(tablebottom4, font, 1, ".......................................", true, 0);
+        addContent(tablebottom4, font, 1, "..................", true, 0);
+
+        addContent(tablebottom4, font, 1, "Distributor’s Assigned Person’s Name", true, 0);
+        addContent(tablebottom4, font, 1, "Signature & Seal:", true, 0);
+        addContent(tablebottom4, font, 1, "Date", true, 0);
 
         addContent(tablebottom4, font, 3, "    ", true, 0);
-        addContent(tablebottom4, font, 3, "Distributor’s Assigned Person’s Name:", true, 0);
+
+        addContent(tablebottom4, font, 3, " N.B bKash Account means the mobile account held with bKash ", true, 0);
 
         addContent(tablebottom4, font, 3, "    ", true, 0);
-        addContent(tablebottom4, font, 3, "Signature & Seal:", true, 0);
 
-        addContent(tablebottom4, font, 3, "    ", true, 0);
-        addContent(tablebottom4, font, 3, "Date: ", true, 0);
-
-        addContent(tablebottom4, font, 3, "    ", true, 0);
-        addContent(tablebottom4, font, 3, "N.B bKash Account means the mobile account held with bKash", true, 0);
-
-      //  addContent(tablebottom4, font, 3, "    ", true, 0);
         addContent(tablebottom4, font, 3, "Page 1 of 2", true, 0);
         document.add(tablebottom4);
 

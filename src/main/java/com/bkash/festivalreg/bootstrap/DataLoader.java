@@ -122,11 +122,20 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		FolkFestAppUser admin = new FolkFestAppUser();
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode("admin");
+		String hashedPassword = passwordEncoder.encode("admin4321");
 		admin.setPassword(hashedPassword);
 		admin.setUsername("admin");
 		admin.setRoles(setAdminRole);
 		userRepository.save(admin);
+
+		hashedPassword = passwordEncoder.encode("user4531");
+		admin.setPassword(hashedPassword);
+		admin.setUsername("user");
+		admin.setRoles(setAdminRole);
+		userRepository.save(admin);
+
+		System.out.println("############user passs"+hashedPassword);
+
 
 	}
 
