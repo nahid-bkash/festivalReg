@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class PdfReportGenerator {
     public void createCustomerRegistrationPDF(String filename, String path, Registration data) throws DocumentException, IOException {
 
 
-      //  MerchantKycData kycData = data.getKycData();
+        //  MerchantKycData kycData = data.getKycData();
         Font f1 = FontFactory.getFont("Times Roman", 8, BaseColor.BLACK);
         Paragraph paragraph;
 
@@ -56,9 +57,9 @@ public class PdfReportGenerator {
         Resource resource = new ClassPathResource("/static/images/bkash.png");
 
         //Image img = Image.getInstance(PDF_ASSETS + "bkash.png");
-        Image img =Image.getInstance(resource.getURL());
+        Image img = Image.getInstance(resource.getURL());
 
-       // img.scaleToFit(100, 100);
+        // img.scaleToFit(100, 100);
         Chunk chunk = new Chunk(img, 0, 0, true);
 
 
@@ -79,7 +80,7 @@ public class PdfReportGenerator {
 
         try {
 
-            String photopath=APPLICANT_PHOTO_ASSETS+data.getAccountNumber()+".jpg";
+            String photopath = APPLICANT_PHOTO_ASSETS + data.getAccountNumber() + ".jpg";
             img = Image.getInstance(photopath);
             img.scaleToFit(90, 90);
             chunk = new Chunk(img, 0, 0, true);
@@ -138,12 +139,12 @@ public class PdfReportGenerator {
 
         //form serial
         Font fontSize8Black = FontFactory.getFont("Times Roman", 8, BaseColor.BLACK);
-        addContent(table, fontSize8Black, 8, "Form Serial # "+data.getFormSerial(), true, 0);
+        addContent(table, fontSize8Black, 8, "Form Serial # " + data.getFormSerial(), true, 0);
         String reportDate = new SimpleDateFormat("dd-MMM-yyyy").format(new Date());
-        addContent(table, fontSize8Black, 8, "Date "+reportDate, true, 0);
-        addContent(table, fontSize8Black, 8, "Account Number # "+data.getAccountNumber(), true, 0);
+        addContent(table, fontSize8Black, 8, "Date " + reportDate, true, 0);
+        addContent(table, fontSize8Black, 8, "Account Number # " + data.getAccountNumber(), true, 0);
         addContent(table, fontSize8Black, 8, "    ", true, 0);
-       // addContent(table, font, 6, ""+data.getFormSerial(), true, 0);
+        // addContent(table, font, 6, ""+data.getFormSerial(), true, 0);
 
         //end of form serial
 
@@ -228,8 +229,15 @@ public class PdfReportGenerator {
         addContent(table, font, 6, data.getSourceOfFund(), true, 0);
 
         addContent(table, font, 2, "12. Estimated Monthly Income: ", true, 0);
-        addContent(table, font, 6,""+ data.getEstimatedMonthlyIncome(), true, 0);
+        DecimalFormat df = new DecimalFormat("#.00");
 
+        if (data.getEstimatedMonthlyIncome() != null){
+            addContent(table, font, 6, "" + df.format(data.getEstimatedMonthlyIncome()), true, 0);
+        }
+        else
+        {
+            addContent(table, font, 6, "" + 0.00, true, 0);
+        }
         addContent(table, font, 2, "13. Detials of Occupation: ", true, 0);
         addContent(table, font, 6,""+ data.getDetailsOfOccupation(), true, 0);
 

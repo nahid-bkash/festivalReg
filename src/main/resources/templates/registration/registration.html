@@ -172,9 +172,13 @@
 
                     <div class="form-group">
                         <label for="estimatedMonthlyIncome">Estimated Monthly Income</label>
+                   <!--     ${#numbers.formatDecimal(abc.value, 0, 'DEFAULT', 2, 'DEFAULT')}-->
                         <input type="text" class="form-control" id="estimatedMonthlyIncome"
                                th:field="*{estimatedMonthlyIncome}"
                                placeholder="Estimated Monthly Income">
+            <!--            <input type="text" class="form-control" id="estimatedMonthlyIncome"  th:field="*{estimatedMonthlyIncome}"
+                               th:value="${#numbers.formatDecimal(registration.estimatedMonthlyIncome,3,2,'COMMA')}"
+                               placeholder="Estimated Monthly Income">-->
                     </div>
 
                     <div class="form-group">

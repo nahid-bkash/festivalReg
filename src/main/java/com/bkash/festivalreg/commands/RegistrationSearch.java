@@ -8,7 +8,7 @@ public class RegistrationSearch {
 
     @NotNull
     @Size(min=11, max=11)
-    @Pattern(regexp = "[\\s]*[0-9]*[1-9]+",message="Only numeric value is required")
+    @Pattern(regexp = "[\\s]*[0-9]+",message="Only numeric value is required")
     private String searchKey;
 
     public String getSearchKey() {

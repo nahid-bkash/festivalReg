@@ -72,8 +72,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		testData1.setAccountFirstName("Nahid");
 		testData1.setAccountLastName("Hossain");
 		testData1.setDetailsOfOccupation("Test Details of occupation");
-		testData1.setAccountNumber("01733400896");
-		testData1.setEstimatedMonthlyIncome(50000.00);
+		testData1.setAccountNumber("01733400890");
+		testData1.setEstimatedMonthlyIncome(Double.valueOf(50000));
 		testData1.setPresentAddress("test present adddress");
 		testData1.setPermanentAddress("test permanent address");
 		testData1.setAccountHasbandWifeName("Husband or Wife Name 1");
@@ -92,7 +92,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		testData2.setAccountLastName("Ahmed");
 		testData2.setDetailsOfOccupation("Test Details of occupation");
 		testData2.setAccountNumber("01733400897");
-		testData2.setEstimatedMonthlyIncome(40000.00);
+		testData2.setEstimatedMonthlyIncome(Double.valueOf(40000));
         testData1.setAccountHasbandWifeName("Husband or Wife Name 2");
 		testData2.setPresentAddress("test present adddress");
 		testData2.setPermanentAddress("test permanent address");
@@ -128,6 +128,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		admin.setRoles(setAdminRole);
 		userRepository.save(admin);
 
+        System.out.println("############admin passs"+hashedPassword);
+/*
 		hashedPassword = passwordEncoder.encode("user4531");
 		admin.setPassword(hashedPassword);
 		admin.setUsername("user");
@@ -136,7 +138,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 		System.out.println("############user passs"+hashedPassword);
 
-
+*/
 	}
 
 
