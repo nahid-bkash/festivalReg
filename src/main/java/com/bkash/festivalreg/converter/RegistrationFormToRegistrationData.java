@@ -30,6 +30,7 @@ public class RegistrationFormToRegistrationData {
         entity.setAccountHasbandWifeName(form.getAccountHasbandWifeName());
         entity.setDataSaved(form.getDataSaved());
         entity.setFormSerial(form.getFormSerial());
+        entity.setPhotoPath(form.getPhotoPath());
         return entity;
 
     }

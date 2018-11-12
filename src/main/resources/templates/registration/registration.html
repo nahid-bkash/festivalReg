@@ -56,7 +56,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="mb-3" style="text-align: center">Account Information (Read Only)</h4>
+                    <h4 class="mb-3" style="text-align: center">Account Information</h4>
                 </div>
 
                 <div class="panel-body">
@@ -64,6 +64,7 @@
                     <div class="mb-3">
                         <label for="accountNumber">Account Number</label>
                         <input type="hidden" th:field="*{id}" />
+                        <input type="hidden" th:field="*{photoPath}" />
                         <input type="text" class="form-control" id="accountNumber" th:field="*{accountNumber}"
                                placeholder="Account Number"
                                readonly="true">

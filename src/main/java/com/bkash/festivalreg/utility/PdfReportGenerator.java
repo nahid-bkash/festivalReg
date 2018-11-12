@@ -1,13 +1,18 @@
 package com.bkash.festivalreg.utility;
 
+import com.bkash.festivalreg.controller.WebAppContoller;
 import com.bkash.festivalreg.domain.Registration;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
@@ -28,7 +33,7 @@ public class PdfReportGenerator {
     private String APPLICANT_PHOTO_ASSETS;
 
 
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PdfReportGenerator.class);
 
 
 
@@ -80,8 +85,19 @@ public class PdfReportGenerator {
 
         try {
 
-            String photopath = APPLICANT_PHOTO_ASSETS + data.getAccountNumber() + ".jpg";
-            img = Image.getInstance(photopath);
+           // String photopath = APPLICANT_PHOTO_ASSETS + data.getAccountNumber() + ".jpg";
+           // img = Image.getInstance("http://shohoz-rides.s3-ap-southeast-1.amazonaws.com/staging/events/81891ce4e82d1292cb8585f41192daa9.jpg");
+           // img = Image.getInstance(photopath);
+
+            System.setProperty("http.proxyHost", "10.32.66.252");
+            System.setProperty("http.proxyPort", "4951");
+            System.setProperty("https.proxyHost", "10.32.66.252");
+            System.setProperty("https.proxyPort", "4951");
+
+
+            LOGGER.warn("FolkFestApp::PdfReportGenerator::photo path is  " + data.getPhotoPath()+" user is :"+getUserName());
+
+            img =Image.getInstance(data.getPhotoPath().trim());
             img.scaleToFit(90, 90);
             chunk = new Chunk(img, 0, 0, true);
             phraseImg = new Phrase();
@@ -93,6 +109,7 @@ public class PdfReportGenerator {
 
         } catch (Exception ex) {
             // do nothing
+           // ex.printStackTrace();
             cell = new PdfPCell(new Phrase("No photo"));
 
         }
@@ -344,6 +361,13 @@ public class PdfReportGenerator {
         document.add(tablebottom4);
 
         document.close();
+    }
+
+
+    private String getUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        return name;
     }
 
 

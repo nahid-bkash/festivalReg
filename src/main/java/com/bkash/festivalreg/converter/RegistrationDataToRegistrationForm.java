@@ -31,6 +31,7 @@ public class RegistrationDataToRegistrationForm implements Converter<Registratio
         form.setAccountHasbandWifeName(data.getAccountHasbandWifeName());
         form.setDataSaved(data.getDataSaved());
         form.setFormSerial(data.getFormSerial());
+        form.setPhotoPath(data.getPhotoPath());
 
         return  form;
     }

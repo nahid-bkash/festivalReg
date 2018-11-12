@@ -1,9 +1,6 @@
 package com.bkash.festivalreg.bootstrap;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import com.bkash.festivalreg.domain.Registration;
 import com.bkash.festivalreg.domain.security.FolkFestAppRole;
@@ -110,14 +107,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		FolkFestAppRole roleAdmin = new FolkFestAppRole();
 		roleAdmin.setRole("ADMIN");
 
-		FolkFestAppRole rolePharma = new FolkFestAppRole();
-		rolePharma.setRole("USER");
+		FolkFestAppRole roleUser = new FolkFestAppRole();
+		roleUser.setRole("USER");
 
 
 		// adding admin user
 		Set<FolkFestAppRole> setAdminRole = new HashSet<FolkFestAppRole>();
 		setAdminRole.add(roleAdmin);
-		// setAdminRole.add(roleManager);
+		//setAdminRole.add(roleUser);
 
 		FolkFestAppUser admin = new FolkFestAppUser();
 
@@ -129,6 +126,36 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		userRepository.save(admin);
 
         System.out.println("############admin passs"+hashedPassword);
+
+		Set<FolkFestAppRole> setUserRole = new HashSet<FolkFestAppRole>();
+		setUserRole.add(roleUser);
+
+    //   for(int a=1;a <=10;a++)
+	//   {
+		   FolkFestAppUser user = new FolkFestAppUser();
+
+
+		Random rand = new Random();
+
+		int  n = rand.nextInt(5676) + 1;
+
+		String userPass ="pass"+n;
+
+		hashedPassword = passwordEncoder.encode(userPass);
+
+
+		   user.setPassword(hashedPassword);
+
+		   String username ="user"+2;
+		   user.setUsername(username);
+		   user.setRoles(setUserRole);
+		   userRepository.save(user);
+
+		   System.out.println("###########user name:"+username+"############user passs (without) "+"pass####"+userPass+"############user passs "+hashedPassword);
+	 //  }
+
+
+
 /*
 		hashedPassword = passwordEncoder.encode("user4531");
 		admin.setPassword(hashedPassword);

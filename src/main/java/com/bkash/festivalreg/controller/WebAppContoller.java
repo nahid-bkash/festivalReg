@@ -196,6 +196,8 @@ public class WebAppContoller {
 
             Registration registrationAfterIncert = registrationService.getRegistrationByAccountNumber(form.getAccountNumber());
             RegistrationForm formdata = registrationDataToRegistrationForm.convert(registrationAfterIncert);
+           // registrationAfterIncert
+
             model.addAttribute("registrationSearch", new RegistrationSearch());
             model.addAttribute("accountNumber", registration.getAccountNumber());
             model.addAttribute("showDownloadLink", true);
